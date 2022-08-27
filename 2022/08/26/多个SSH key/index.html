@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta property="og:type" content="article">
+    <meta name="description" content="生成 ssk key使用命令生成 ssh key，注意需要指定名字。 比如你想生成 Github 用的，可以给他起个名字 github_id_rsa 1ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~&#x2F;.ssh&#x2F;github_id_rsa 然后再生成一个 Gitlab 用的 key,名字为 gitlab_id_rsa 1ssh-keygen -t r">
+<meta property="og:type" content="article">
 <meta property="og:title" content="多个 SSH key 的配置">
 <meta property="og:url" content="https://keepupcode.github.io/2022/08/26/%E5%A4%9A%E4%B8%AASSH%20key/index.html">
 <meta property="og:site_name" content="KeepUp&#39; Blog">
+<meta property="og:description" content="生成 ssk key使用命令生成 ssh key，注意需要指定名字。 比如你想生成 Github 用的，可以给他起个名字 github_id_rsa 1ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~&#x2F;.ssh&#x2F;github_id_rsa 然后再生成一个 Gitlab 用的 key,名字为 gitlab_id_rsa 1ssh-keygen -t r">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-26T13:11:13.000Z">
-<meta property="article:modified_time" content="2022-08-27T06:39:41.549Z">
+<meta property="article:modified_time" content="2022-08-27T07:44:06.918Z">
 <meta property="article:author" content="KeepUP">
 <meta property="article:tag" content="git ssh">
 <meta name="twitter:card" content="summary">
@@ -147,7 +149,7 @@
 
     </div> -->
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90-ssk-key"><span class="toc-number">1.</span> <span class="toc-text">生成 ssk key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-config-%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">添加 config 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -190,7 +192,29 @@
   
 
   <div class="content" itemprop="articleBody">
-    
+    <h3 id="生成-ssk-key"><a href="#生成-ssk-key" class="headerlink" title="生成 ssk key"></a>生成 ssk key</h3><p>使用命令生成 ssh key，注意需要指定<strong>名字</strong>。</p>
+<p>比如你想生成 Github 用的，可以给他起个名字 <code>github_id_rsa</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
+<p>然后再生成一个 Gitlab 用的 key,名字为 <code>gitlab_id_rsa</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail2&quot; -f ~/.ssh/gitlab_id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>如果你有两个 Github 账号，你也可以再生成一个 <code>github1_id_rsa</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~/.ssh/github1_id_rsa</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加-config-配置"><a href="#添加-config-配置" class="headerlink" title="添加 config 配置"></a>添加 config 配置</h3><p>在 <code>~/.ssh</code> 目录下，新建一个 config 文件，然后配置以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># github</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br><span class="line"></span><br><span class="line"># gitlab</span><br><span class="line">Host gitlab.com</span><br><span class="line">HostName gitlab.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/gitlab_id_rsa</span><br><span class="line"></span><br><span class="line"># github1</span><br><span class="line">Host github.A.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Host</code> 自定义别名，后边会用到</li>
+<li><code>HostName</code> 服务器域名</li>
+<li><code>用户名</code>，有的是邮箱,一般默认情况 git 就可以</li>
+<li><code>IdentityFile</code> 对应的私钥,也就是不带.pub 后缀的</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>你以前用 ssh 克隆项目时是：<code>git clone git@github.com:username/repository.git</code></p>
+<p>但是现在你需要使用 config 里边定义的 Host，一般情况下 Host 和服务器域名的名字相同，但是比如我们有两个 github 账号，我第二个账号的别名是 github.A.com ，那我们克隆的时候就需要改成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 原来</span><br><span class="line">git clone git@github.com:username/repository.git</span><br><span class="line"># 现在</span><br><span class="line">git clone git@github.A.com:username/repository.git</span><br></pre></td></tr></table></figure>
+
+
   </div>
 </article>
 
@@ -233,7 +257,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90-ssk-key"><span class="toc-number">1.</span> <span class="toc-text">生成 ssk key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-config-%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">添加 config 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li></ol>
     </div>
 
     <!-- <div id="share-footer" style="display: none">
