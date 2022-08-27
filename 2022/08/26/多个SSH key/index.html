@@ -14,7 +14,7 @@
 <meta property="og:description" content="生成 ssk key使用命令生成 ssh key，注意需要指定名字。 比如你想生成 Github 用的，可以给他起个名字 github_id_rsa 1ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~&#x2F;.ssh&#x2F;github_id_rsa 然后再生成一个 Gitlab 用的 key,名字为 gitlab_id_rsa 1ssh-keygen -t r">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-26T13:11:13.000Z">
-<meta property="article:modified_time" content="2022-08-27T07:48:03.509Z">
+<meta property="article:modified_time" content="2022-08-27T09:44:22.473Z">
 <meta property="article:author" content="KeepUP">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="ssh">
@@ -211,15 +211,15 @@
   <div class="content" itemprop="articleBody">
     <h3 id="生成-ssk-key"><a href="#生成-ssk-key" class="headerlink" title="生成 ssk key"></a>生成 ssk key</h3><p>使用命令生成 ssh key，注意需要指定<strong>名字</strong>。</p>
 <p>比如你想生成 Github 用的，可以给他起个名字 <code>github_id_rsa</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail1&quot;</span> -f ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
 <p>然后再生成一个 Gitlab 用的 key,名字为 <code>gitlab_id_rsa</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail2&quot; -f ~/.ssh/gitlab_id_rsa</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail2&quot;</span> -f ~/.ssh/gitlab_id_rsa</span><br></pre></td></tr></table></figure>
 
 <p>如果你有两个 Github 账号，你也可以再生成一个 <code>github1_id_rsa</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail1&quot; -f ~/.ssh/github1_id_rsa</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail1&quot;</span> -f ~/.ssh/github1_id_rsa</span><br></pre></td></tr></table></figure>
 
 <h3 id="添加-config-配置"><a href="#添加-config-配置" class="headerlink" title="添加 config 配置"></a>添加 config 配置</h3><p>在 <code>~/.ssh</code> 目录下，新建一个 config 文件，然后配置以下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># github</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br><span class="line"></span><br><span class="line"># gitlab</span><br><span class="line">Host gitlab.com</span><br><span class="line">HostName gitlab.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/gitlab_id_rsa</span><br><span class="line"></span><br><span class="line"># github1</span><br><span class="line">Host github.A.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># github</span></span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># gitlab</span></span><br><span class="line">Host gitlab.com</span><br><span class="line">HostName gitlab.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/gitlab_id_rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># github1</span></span><br><span class="line">Host github.A.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>Host</code> 自定义别名，后边会用到</li>
@@ -229,7 +229,7 @@
 </ul>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>你以前用 ssh 克隆项目时是：<code>git clone git@github.com:username/repository.git</code></p>
 <p>但是现在你需要使用 config 里边定义的 Host，一般情况下 Host 和服务器域名的名字相同，但是比如我们有两个 github 账号，我第二个账号的别名是 github.A.com ，那我们克隆的时候就需要改成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 原来</span><br><span class="line">git clone git@github.com:username/repository.git</span><br><span class="line"># 现在</span><br><span class="line">git clone git@github.A.com:username/repository.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原来</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:username/repository.git</span><br><span class="line"><span class="comment"># 现在</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.A.com:username/repository.git</span><br></pre></td></tr></table></figure>
 
 
   </div>
